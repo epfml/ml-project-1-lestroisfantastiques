@@ -364,7 +364,7 @@ def learning_by_penalized_gradient(y, tx,lambda_, initial_w, max_iters, gamma):
     """
     w = initial_w
     loss = calculate_loss(y, tx, w) + lambda_ * np.squeeze(w.T.dot(w))
-    gradient = calculate_gradient(y, tx, w) + 2 * lambda_ * w
+    gradient = calculate_gradient(y, tx, w) + lambda_ * w**2
     for n_iter in range(max_iters):
         w = w - gamma * gradient
    
