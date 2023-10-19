@@ -292,6 +292,81 @@ def calculate_hessian(y, tx, w):
     return tx.T.dot(r).dot(tx) * (1 / y.shape[0])
 
 
+def learning_by_newton_method(y, tx, initial_w, max_iters, gamma):
+    """
+    Do one step of Newton's method.
+    Return the loss and updated w.
+
+    Args:
+        y:  shape=(N, 1)
+        tx: shape=(N, D)
+        w:  shape=(D, 1)
+        gamma: scalar
+
+    Returns:
+        loss: scalar number
+        w: shape=(D, 1)
+
+    >>> y = np.c_[[0., 0., 1., 1.]]
+    >>> np.random.seed(0)
+    >>> tx = np.random.rand(4, 3)
+    >>> w = np.array([[0.1], [0.5], [0.5]])
+    >>> gamma = 0.1
+    >>> loss, w = learning_by_newton_method(y, tx, w, gamma)
+    >>> round(loss, 8)
+    0.71692036
+    >>> w
+    array([[-1.31876014],
+           [ 1.0590277 ],
+           [ 0.80091466]])
+    """
+    w = initial_w
+    loss = calculate_loss(y, tx, w)
+    gradient = calculate_gradient(y, tx, w)
+    hessian = calculate_hessian(y, tx, w)
+
+    for n_iter in range(max_iters) :
+        w = w - gamma * np.linalg.solve(hessian, gradient)
+    
+    return loss, w
 
 #*****************-reg_logistic_regression-*************************************
+
+def learning_by_penalized_gradient(y, tx,lambda_, initial_w, max_iters, gamma):
+    """
+    Do one step of gradient descent, using the penalized logistic regression.
+    Return the loss and updated w.
+
+    Args:
+        y:  shape=(N, 1)
+        tx: shape=(N, D)
+        w:  shape=(D, 1)
+        gamma: scalar
+        lambda_: scalar
+
+    Returns:
+        loss: scalar number
+        w: shape=(D, 1)
+
+    >>> np.set_printoptions(8)
+    >>> y = np.c_[[0., 1.]]
+    >>> tx = np.arange(6).reshape(2, 3)
+    >>> w = np.array([[0.1], [0.2], [0.3]])
+    >>> lambda_ = 0.1
+    >>> gamma = 0.1
+    >>> loss, w = learning_by_penalized_gradient(y, tx, w, gamma, lambda_)
+    >>> round(loss, 8)
+    0.63537268
+    >>> w
+    array([[0.10837076],
+           [0.17532896],
+           [0.24228716]])
+    """
+    w = initial_w
+    loss = calculate_loss(y, tx, w) + lambda_ * np.squeeze(w.T.dot(w))
+    gradient = calculate_gradient(y, tx, w) + 2 * lambda_ * w
+    for n_iter in range(max_iters):
+        w = w - gamma * gradient
+   
+    return loss, w
 
