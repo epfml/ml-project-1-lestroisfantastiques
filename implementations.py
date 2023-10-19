@@ -267,39 +267,31 @@ def calculate_gradient(y, tx, w):
     grad = tx.T.dot(a - y) * (1 / y.shape[0])
     return grad
 
-def learning_by_gradient_descent(y, tx, initial_w, max_iters, gamma):
-    """
-    Do one step of gradient descent using logistic regression. Return the loss and the updated w.
+def calculate_hessian(y, tx, w):
+    """return the Hessian of the loss function.
 
     Args:
         y:  shape=(N, 1)
         tx: shape=(N, D)
         w:  shape=(D, 1)
-        gamma: float
 
     Returns:
-        loss: scalar number
-        w: shape=(D, 1)
+        a hessian matrix of shape=(D, D)
 
     >>> y = np.c_[[0., 1.]]
     >>> tx = np.arange(6).reshape(2, 3)
     >>> w = np.array([[0.1], [0.2], [0.3]])
-    >>> gamma = 0.1
-    >>> loss, w = learning_by_gradient_descent(y, tx, w, gamma)
-    >>> round(loss, 8)
-    0.62137268
-    >>> w
-    array([[0.11037076],
-           [0.17932896],
-           [0.24828716]])
+    >>> calculate_hessian(y, tx, w)
+    array([[0.28961235, 0.3861498 , 0.48268724],
+           [0.3861498 , 0.62182124, 0.85749269],
+           [0.48268724, 0.85749269, 1.23229813]])
     """
-    
-    w = initial_w
-    
-    for n_iter in range(max_iters):
-        loss = calculate_loss(y, tx, w)
-        grad = calculate_gradient(y, tx, w)
-        w -= gamma * grad
-    
-    return loss, w
+    # ***************************************************
+    # INSERT YOUR CODE HERE
+    # calculate Hessian: TODO
+    a = sigmoid(tx.dot(w))
+    a = np.diag(a.T[0])
+    r = np.multiply(a, (1 - a))
+
+#*****************-reg_logistic_regression-*************************************
 
