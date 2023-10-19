@@ -286,12 +286,12 @@ def calculate_hessian(y, tx, w):
            [0.3861498 , 0.62182124, 0.85749269],
            [0.48268724, 0.85749269, 1.23229813]])
     """
-    # ***************************************************
-    # INSERT YOUR CODE HERE
-    # calculate Hessian: TODO
     a = sigmoid(tx.dot(w))
     a = np.diag(a.T[0])
     r = np.multiply(a, (1 - a))
+    return tx.T.dot(r).dot(tx) * (1 / y.shape[0])
+
+
 
 #*****************-reg_logistic_regression-*************************************
 
