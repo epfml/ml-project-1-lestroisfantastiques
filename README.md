@@ -21,7 +21,9 @@ You will also need to have software installed to run and execute a [Jupyter Note
 
 Our code is composed of different jupyter Notebook : 
 The first part of our project is composed of overviewing and cleaning the data: you can see the steps in Overview.
-Then, you see our functions that we compared in the file `implementations.py`. 
+Then, you see our functions that we compared in the file `implementations.py`.
+You can try our code with`run.py`. 
+
 
 
 ### Report
