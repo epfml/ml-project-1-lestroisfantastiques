@@ -1,24 +1,23 @@
 import numpy as np
 from helpers import *
 
-def select_features(data,headers,indices):
+def select_features(data,indices):
     features = []
 
-    for idx in indices:
+   for idx in indices:
 
         # Select the specific feature column in the randomly selected data values
         feature_column = data[:, idx-2]  # Utilisez feature_idx-2 car les indices commencent à 0 et il y a un decalage de 1 avec les ids
-        
         # Add the column to the list features
         features.append(feature_column)
-
-        #taking the corresponding headers
-        Headers = headers[idx-1] 
-
+       
         # List into Numpy Array
-    data_selected= np.array(features)
+    #data_selected= np.array(features)
+    data_selected = np.column_stack(features)
 
-    return data_selected,headers
+     #taking the corresponding headers
+    #Headers = [headers[idx-1] for idx in indices]
+    return data_selected
 
 
 
