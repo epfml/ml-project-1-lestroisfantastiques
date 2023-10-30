@@ -40,7 +40,7 @@ indices_y0 = np.where(y_train == 0)[0]
 
 
 
-# Sélectionnez un nombre égal d'indices aléatoires pour les deux classes
+
 num_samples = min(len(indices_y1), len(indices_y0))
 selected_indices_y1 = np.random.choice(indices_y1, num_samples, replace=False)
 selected_indices_y0 = np.random.choice(indices_y0, num_samples, replace=False)
@@ -48,10 +48,10 @@ selected_indices_y0 = np.random.choice(indices_y0, num_samples, replace=False)
 print('indices selectionés:', selected_indices_y1)
 print('indices selectionés y0:', selected_indices_y0)
 
-# Combinez les indices sélectionnés pour former un ensemble de données équilibré
+
 selected_indices = np.concatenate((selected_indices_y1, selected_indices_y0))
 
-# Sélectionnez les données correspondantes à ces indices 
+
 balanced_x_train = x_train[selected_indices]
 balanced_y_train = y_train[selected_indices]
 
