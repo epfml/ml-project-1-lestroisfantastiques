@@ -106,7 +106,9 @@ def ridge_regression(y, tx, lambda_):
     aI = 2 * tx.shape[0] * lambda_ * np.identity(tx.shape[1])
     a = tx.T.dot(tx) + aI
     b = tx.T.dot(y)
-    return np.linalg.solve(a, b)
+    w = np.linalg.solve(a, b)
+    mse = compute_loss(y,tx,w)
+    return w, mse
 
 #*****************-logistic_regression-*************************************
 
@@ -158,4 +160,23 @@ def learning_by_penalized_gradient(y, tx,lambda_, initial_w, max_iters, gamma):
         w = w - gamma * gradient
    
     return loss, w
+
+
+
+
+
+# Compute the confusion matrix between two vectors, used to compare models.
+def compute_confusion_matrix(true_values, predicted_values):
+    '''Computes a confusion matrix using numpy for two np.arrays
+    true_values and predicted_values. '''
+    N = len(np.unique(true_values)) # Number of classes 
+    result = np.zeros((N, N))
+    true_values[np.where(true_values == -1)] = 0
+    predicted_values[np.where(predicted_values == -1)] = 0
+
+    for i in range(len(true_values)):
+        result[int(true_values[i])][int(predicted_values[i])] += 1
+        
+    return result
+
 
