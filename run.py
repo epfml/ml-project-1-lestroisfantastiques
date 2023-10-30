@@ -20,12 +20,13 @@ headers = load_headers(PATH)
 # Preprocessing data
 print('Prepocessing data...')
 
-#selecting features
-indices= [231,232,233,235,238,239,237,247,255,260,264,265,266,277,278,288,302,314,320]
-tx, headers = select_features(x_train,headers,indices)
-
 #balance data
 tx, y, x_te = balance_data(tx,y_train, x_test)
+
+#selecting features
+indices= np.array([231,232,233,235,238,239,237,247,255,260,264,265,266,277,278,288,302,314,320])
+tx, headers = select_features(x_train,headers,indices)
+
 
 #clean data of missing values
 tx = clean_data(tx)
