@@ -32,11 +32,23 @@ tx = clean_data(tx)
 tx_test = clean_data(x_te)
 
 #standardize data
+#**************
+
 
 # Augmenting features :
-
+print('Expanding features...')
+#**************
+#tx = expand_features_angles(tx)
+#tx_test = expand_features_angles(tx_test)
 
 # Splitting the data between training and validation
+print('Splitting dataset between training and validation subsets...')
+x_tr, x_val, y_tr, y_val = split_data(tx, y, 0.9)
+
+
+
+
+
 
 
 
