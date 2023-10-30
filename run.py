@@ -121,7 +121,7 @@ y_pred_LR = np.dot(X_test_poly, w_opt_LR)
 y_pred_RR = np.dot(X_test_poly, w_opt_RR)
 
 
-accuracy_GD = test_pred(y_pred_MSE_GD, y_test_in)
+accuracy_GD = test_pred(y_pred_GD, y_test_in)
 
 XTEST1 = np.c_[x_test[:, 245], x_test[:, 252]]
 XTEST2 = build_poly(XTEST1, 3)
